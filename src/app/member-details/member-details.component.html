@@ -1,0 +1,67 @@
+<div class="container-fluid col-md-6">
+  <h3 class="text-center lead">{{pageTitle}}</h3>
+  <br />
+  <form (ngSubmit)="saveMember()" [formGroup]="memberForm">
+    <div>
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="firstNameId" formControlName="firstName" placeholder="First Name"
+            [ngClass]="{'is-invalid': displayMessage.firstName }" />
+          <span class="invalid-feedback">
+            {{displayMessage.firstName}}
+          </span>
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="lastNameId" formControlName="lastName" placeholder="Last Name"
+            [ngClass]="{'is-invalid': displayMessage.lastName }" />
+          <span class="invalid-feedback">
+            {{displayMessage.lastName}}
+          </span>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="jobTitleId" formControlName="jobTitle" placeholder="Job Title"
+            [ngClass]="{'is-invalid': displayMessage.jobTitle }" />
+          <span class="invalid-feedback">
+            {{displayMessage.jobTitle}}
+          </span>
+        </div>
+        <div class="col-md-6">
+          <select id="teamId" class="custom-select" formControlName="teamId"
+            [ngClass]="{'is-invalid': displayMessage.teamId }">
+            <option *ngFor="let team of teams; let i = index" [value]="teams[i].id">
+              {{teams[i].teamName}}
+            </option>
+
+          </select>
+          <span class="invalid-feedback">
+            {{displayMessage.teamId}}
+          </span>
+        </div>
+      </div>
+      <br />
+      <div class="form-group col-md-6">
+        <div class="row">
+          <label id="activeStatus" class="md-check lead">
+            <input type="radio" value="Active" name="status" formControlName="status" /> Active
+          </label>
+          <label class="md-check lead">
+            <input type="radio" value="Inactive" name="status" formControlName="status" /> Inactive
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row mb-2 pull-right">
+      <button class="btn btn-primary button-pad" (click)="redirectToPrevious()">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="!memberForm.valid">
+        Save Member
+      </button>
+    </div>
+  </form>
+  <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>
